@@ -90,8 +90,8 @@ stages:
 
   - job: 'BuildiOSAppCenterApp'
     pool:
-        name: Hosted Mac Internal
-        demands: Xamarin.iOS
+        vmImage: 'windows-latest'
+        
     steps:
     - task: AzureKeyVault@1
       displayName: 'Azure Key Vault: BuildAutomation'
