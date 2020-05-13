@@ -23,4 +23,4 @@ stages:
     - task: DownloadSecureFile@1
       displayName: 'Download Provisioning Provile'
       inputs:
-        secureFile: 'iOS_Team_Provisioning_Profile.mobileprovision'
+        secureFile: 'TestFile.mobileprovision'
