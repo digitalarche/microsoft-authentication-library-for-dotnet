@@ -12,13 +12,3 @@ steps:
   parameters:
     BuildPlatform: '$(BuildPlatform)'
     BuildConfiguration: '$(BuildConfiguration)'
-
-# Run Unit Tests
-- template: template-run-unit-tests.yaml
-  parameters:
-    BuildConfiguration: '$(BuildConfiguration)'
-
-# Run Integration Tests
-- template: template-run-integration-tests.yaml
-  parameters:
-    BuildConfiguration: '$(BuildConfiguration)'
