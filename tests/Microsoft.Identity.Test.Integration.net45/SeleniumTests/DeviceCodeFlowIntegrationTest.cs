@@ -75,6 +75,7 @@ namespace Microsoft.Identity.Test.Integration.SeleniumTests
         }
 
         [TestMethod]
+        [Ignore]
         [Timeout(2 * 60 * 1000)] // 2 min timeout
         public async Task DeviceCodeFlowMsaTestAsync()
         {
