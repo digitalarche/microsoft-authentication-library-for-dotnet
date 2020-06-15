@@ -62,8 +62,8 @@ namespace Microsoft.Identity.Client.Platforms.iOS
                 logger.Info("Could not add the broker key, a key already exists. Trying to delete it first.");
                 var recordToRemove = new SecRecord(SecKind.GenericPassword)
                 {
-                    Service = "Broker Key Service",
-                    Account = "Broker Key Account",
+                    Service = iOSBrokerConstants.BrokerKeyService,
+                    Account = iOSBrokerConstants.BrokerKeyAccount,
                 };
 
                 var removeResult = SecKeyChain.Remove(recordToRemove);

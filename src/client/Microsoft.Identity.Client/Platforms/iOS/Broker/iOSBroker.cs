@@ -115,7 +115,8 @@ namespace Microsoft.Identity.Client.Platforms.iOS
             brokerRequest.Add(BrokerParameter.ClientId, authenticationRequestParameters.ClientId);
             brokerRequest.Add(BrokerParameter.CorrelationId, authenticationRequestParameters.RequestContext.CorrelationId.ToString());
             brokerRequest.Add(BrokerParameter.ClientVersion, MsalIdHelper.GetMsalVersion());
-            //brokerRequest.Add(BrokerParameter.RedirectUri, authenticationRequestParameters.RedirectUri.AbsoluteUri.TrimEnd('/'));
+
+            // this needs to be case sensitive because the AppBundle is case sensitive
             brokerRequest.Add(BrokerParameter.RedirectUri, authenticationRequestParameters.OriginalRedirectUriString);
 
             if (authenticationRequestParameters.ExtraQueryParameters?.Any() == true)
