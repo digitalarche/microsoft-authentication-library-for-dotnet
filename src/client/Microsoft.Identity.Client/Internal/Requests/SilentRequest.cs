@@ -114,7 +114,8 @@ namespace Microsoft.Identity.Client.Internal.Requests
 
             ThrowIfNoScopesOnB2C();
 
-            if (!_silentParameters.ForceRefresh && !AuthenticationRequestParameters.HasClaims)
+            if (!_silentParameters.ForceRefresh && 
+                string.IsNullOrEmpty(AuthenticationRequestParameters.Claims))
             {
                 cachedAccessTokenItem = await CacheManager.FindAccessTokenAsync().ConfigureAwait(false);
 
