@@ -22,7 +22,6 @@ namespace Microsoft.Identity.Client
         /// </summary>
         bool IsSystemWebViewAvailable { get; }
 
-#pragma warning disable CS1574 // XML comment has cref attribute that could not be resolved
         /// <summary>
         /// Interactive request to acquire a token for the specified scopes. The interactive window will be parented to the specified
         /// window. The user will be required to select an account
@@ -31,24 +30,20 @@ namespace Microsoft.Identity.Client
         /// <returns>A builder enabling you to add optional parameters before executing the token request</returns>
         /// <remarks>The user will be signed-in interactively if needed,
         /// and will consent to scopes and do multi-factor authentication if such a policy was enabled in the Azure AD tenant.
-        ///
-        /// You can also pass optional parameters by calling:
+        /// You can also pass optional parameters by calling (this list is not exhaustive):
         /// <see cref="AcquireTokenInteractiveParameterBuilder.WithPrompt(Prompt)"/> to specify the user experience
         /// when signing-in, <see cref="AcquireTokenInteractiveParameterBuilder.WithUseEmbeddedWebView(bool)"/> to specify
         /// if you want to use the embedded web browser or the system default browser,
-        /// <see cref="AcquireTokenInteractiveParameterBuilder.WithSystemWebViewOptions(SystemWebViewOptions)"/> to configure
-        /// the user experience when using the Default browser,
         /// <see cref="AcquireTokenInteractiveParameterBuilder.WithAccount(IAccount)"/> or <see cref="AcquireTokenInteractiveParameterBuilder.WithLoginHint(string)"/>
         /// to prevent the select account dialog from appearing in the case you want to sign-in a specific account,
         /// <see cref="AcquireTokenInteractiveParameterBuilder.WithExtraScopesToConsent(IEnumerable{string})"/> if you want to let the
         /// user pre-consent to additional scopes (which won't be returned in the access token),
         /// <see cref="AbstractAcquireTokenParameterBuilder{T}.WithExtraQueryParameters(Dictionary{string, string})"/> to pass
         /// additional query parameters to the STS, and one of the overrides of <see cref="AbstractAcquireTokenParameterBuilder{T}.WithAuthority(string, bool)"/>
-        /// in order to override the default authority set at the application construction. Note that the overriding authority needs to be part
-        /// of the known authorities added to the application construction.
+        /// in order to override the default authority set at the application construction.
+        /// WithParentActivityOrWindow which helps MSAL know to which window / control / activity to return after the system browser will have finished
         /// </remarks>
         AcquireTokenInteractiveParameterBuilder AcquireTokenInteractive(IEnumerable<string> scopes);
-#pragma warning restore CS1574 // XML comment has cref attribute that could not be resolved
 
         /// <summary>
         /// Acquires a security token on a device without a Web browser, by letting the user authenticate on
