@@ -16,10 +16,10 @@ steps:
   inputs:
     secureFile: 'TestFile.mobileprovision'
 
-- task: UseDotNet@2
+- task: DotNetCoreInstaller@0
+  displayName: 'Use .NET Core sdk 2.1.502'
   inputs:
-    version: 3.0.100
-  displayName: 'Use .Net Core SDK 3.0.100'
+    version: 2.1.502
 
 - bash: |
     SYMLINK="6_4_0"
