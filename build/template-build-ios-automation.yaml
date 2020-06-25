@@ -40,7 +40,7 @@ steps:
 
 - task: XamariniOS@2
   inputs:
-    solutionFile: '\tests\devapps\XForms\XForms.iOS.csproj'
+    solutionFile: 'tests/devapps/XForms/XForms.iOS.csproj'
     configuration: 'Debug'
     packageApp: true
     runNugetRestore: true
