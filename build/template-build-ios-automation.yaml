@@ -38,12 +38,17 @@ steps:
     echo "##vso[task.setvariable variable=PATH;]/Library/Frameworks/Mono.framework/Versions/$SYMLINK/bin:$PATH"
   displayName: Select Xamarin and Mono Version
 
+- task: UseDotNet@2
+  inputs:
+    version: 3.0.100
+  displayName: 'Use .Net Core SDK 3.0.100'
+
 - task: XamariniOS@2
   inputs:
     solutionFile: tests/devapps/XForms/XForms.iOS/XForms.iOS.csproj
     configuration: 'Debug'
     packageApp: true
-    runNugetRestore: true
+    runNugetRestore: false
     args: '/p:APPCENTER_BUILD=1 /p:RunCodeAnalysis=false'
     signingIdentity: 'APPLE_CERTIFICATE_SIGNING_IDENTITY'
     signingProvisioningProfileID: 'APPLE_PROV_PROFILE_UUID'
