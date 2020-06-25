@@ -30,6 +30,12 @@ steps:
   inputs:
     provProfileSecureFile: 'TestFile.mobileprovision'
 
+- task: Xcode@5
+  inputs:
+    signingOption: 'manual'
+    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+    provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+
 - task: NuGetCommand@2
   displayName: 'NuGet restore'
   inputs:
