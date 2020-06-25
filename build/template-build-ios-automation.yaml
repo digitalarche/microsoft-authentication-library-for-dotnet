@@ -16,28 +16,43 @@ steps:
   inputs:
     secureFile: 'TestFile.mobileprovision'
 
-- task: DotNetCoreInstaller@0
-  displayName: 'Use .NET Core sdk 2.1.502'
+- task: UseDotNet@2
   inputs:
-    version: 2.1.502
+    version: 3.0.100
+  displayName: 'Use .Net Core SDK 3.0.100'
 
-- task: NuGetCommand@2
-  displayName: 'NuGet restore'
+- task: InstallAppleCertificate@2
   inputs:
-    restoreSolution: LibsMacOS.sln
+    certSecureFile: 'AppCenteriOSBuildCert.p12'
+    certPwd: '$(AppCenterDotNetiOSTestCertPassword)'
 
-- task: XamariniOS@1
-  displayName: 'Build Xamarin.iOS solution LibsMacOS.sln'
+- task: InstallAppleProvisioningProfile@1
   inputs:
-    solutionFile: LibsMacOS.sln
-    configuration: Debug
-    clean: true
-    runNugetRestore: false
+    provProfileSecureFile: '$(Agent.TempDirectory)/TestFile.mobileprovision'
+
+- task: Xcode@5
+  inputs:
+    signingOption: 'manual'
+    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+    provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+
+- bash: |
+    SYMLINK="6_4_0"
+    # Set Xamarin.Android 10.0
+    sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $SYMLINK
+    # Set Mono 6.4.0
+    echo "##vso[task.setvariable variable=PATH;]/Library/Frameworks/Mono.framework/Versions/$SYMLINK/bin:$PATH"
+  displayName: Select Xamarin and Mono Version
+
+- task: XamariniOS@2
+  inputs:
+    solutionFile: '\tests\devapps\XForms\XForms.iOS.csproj'
+    configuration: 'Debug'
+    packageApp: true
+    runNugetRestore: true
     args: '/p:APPCENTER_BUILD=1 /p:RunCodeAnalysis=false'
-    buildToolOption: msbuild
-    signingP12File: '$(Agent.TempDirectory)/AppCenteriOSBuildCert.p12'
-    signingP12Password: '$(AppCenterDotNetiOSTestCertPassword)'
-    signingProvisioningProfileFile: '$(Agent.TempDirectory)/TestFile.mobileprovision'
+    signingIdentity: 'APPLE_CERTIFICATE_SIGNING_IDENTITY'
+    signingProvisioningProfileID: 'APPLE_PROV_PROFILE_UUID'
 
 - task: CopyFiles@2
   displayName: 'Copy ipa to staging directory'
