@@ -37,7 +37,7 @@ stages:
 
   - job: 'BuildiOSAppCenterApp'
     pool:
-        vmImage: 'macOS-10.15'
+        pool: 'Hosted Mac Internal'
         demands: Xamarin.iOS
 
     steps:
