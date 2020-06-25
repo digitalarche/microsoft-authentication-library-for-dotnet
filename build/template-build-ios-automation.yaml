@@ -28,7 +28,7 @@ steps:
 
 - task: InstallAppleProvisioningProfile@1
   inputs:
-    provProfileSecureFile: '$(Agent.TempDirectory)/TestFile.mobileprovision'
+    provProfileSecureFile: 'TestFile.mobileprovision'
 
 - task: Xcode@5
   inputs:
