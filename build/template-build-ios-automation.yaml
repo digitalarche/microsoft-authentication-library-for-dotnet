@@ -38,10 +38,10 @@ steps:
     echo "##vso[task.setvariable variable=PATH;]/Library/Frameworks/Mono.framework/Versions/$SYMLINK/bin:$PATH"
   displayName: Select Xamarin and Mono Version
 
-- task: UseDotNet@2
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
   inputs:
-    version: 3.0.100
-  displayName: 'Use .Net Core SDK 3.0.100'
+    restoreSolution: LibsMacOS.sln
 
 - task: XamariniOS@2
   inputs:
