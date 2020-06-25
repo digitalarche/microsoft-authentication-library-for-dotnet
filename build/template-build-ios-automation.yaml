@@ -24,7 +24,7 @@ steps:
 - task: InstallAppleCertificate@2
   inputs:
     certSecureFile: 'AppCenteriOSBuildCert.p12'
-    certPwd: '$(AppCenterDotNetiOSTestCertPassword)'
+    certPwd: '$(CertPW)'
 
 - task: InstallAppleProvisioningProfile@1
   inputs:
