@@ -29,6 +29,6 @@ namespace Microsoft.Identity.Client.Core
         void VerbosePii(string messageWithPii, string messageScrubbed);
         void Log(LogLevel logLevel, string messageWithPii, string messageScrubbed);
         DurationLogHelper LogBlockDuration(string measuredBlockName, LogLevel logLevel = LogLevel.Verbose);
-        DurationLogHelper LogMethodDuration(LogLevel logLevel = LogLevel.Verbose, [CallerMemberName] string methodName = null);
+        DurationLogHelper LogMethodDuration(LogLevel logLevel = LogLevel.Verbose, [CallerMemberName] string methodName = null, [CallerFilePath] string filePath = null);
     }
 }
