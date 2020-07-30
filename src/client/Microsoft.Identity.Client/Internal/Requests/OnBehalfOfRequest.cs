@@ -36,25 +36,6 @@ namespace Microsoft.Identity.Client.Internal.Requests
 
             await ResolveAuthorityEndpointsAsync().ConfigureAwait(false);
 
-            // look for access token in the cache first.
-            // no access token is found, then it means token does not exist
-            // or new assertion has been passed. We should not use Refresh Token
-            // for the user because the new incoming token may have updated claims
-            // like mfa etc.
-            MsalAccessTokenCacheItem msalAccessTokenItem = await CacheManager.FindAccessTokenAsync().ConfigureAwait(false);
-            if (msalAccessTokenItem != null)
-            {
-                AuthenticationRequestParameters.RequestContext.ApiEvent.IsAccessTokenCacheHit = true;
-
-                return new AuthenticationResult(
-                    msalAccessTokenItem, 
-                    null,
-                    AuthenticationRequestParameters.AuthenticationScheme,
-                    AuthenticationRequestParameters.RequestContext.CorrelationId,
-                    TokenSource.Cache);
-            }
-
-
             var msalTokenResponse = await SendTokenRequestAsync(GetBodyParameters(), cancellationToken).ConfigureAwait(false);
             return await CacheTokenResponseAndCreateAuthenticationResultAsync(msalTokenResponse).ConfigureAwait(false);
         }
